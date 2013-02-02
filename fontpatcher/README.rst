@@ -162,3 +162,8 @@ OS X
        $ rm /tmp/Powerline.cache
 
 9. Start vim and enjoy your new statusline!
+
+Attributions
+------------
+Druplicon svg is based on work by Steve Harley
+http://growingventuresolutions.com/blog/miniature-monochrome-druplicon.html
