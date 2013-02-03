@@ -18,3 +18,8 @@ _drush_completion() {
 
 # Register our completion function. We include common short aliases for Drush.
 complete -o nospace -F _drush_completion d dr drush drush5 drush6 drush6 drush.php
+
+## Register another completion function for every alias to drush.
+for a in $(drush sa); do
+  complete -o nospace -F _drush_completion $a > /dev/null
+done
