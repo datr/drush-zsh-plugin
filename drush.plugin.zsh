@@ -104,11 +104,11 @@ alias q='drush sql-query'
 # cd='cdd' if you want to be able to use cd @remote to ssh to a
 # remote site.
 
-#alias cd='cddl'
-#alias ls='lsd'
-#alias cp='cpd'
-#alias ssh='dssh'
-#alias git='gitd'
+alias cd='cddl'
+alias ls='lsd'
+alias cp='cpd'
+alias ssh='dssh'
+alias git='gitd'
 
 # Find the drush executable and test it.
 d=$(which drush)
@@ -148,10 +148,10 @@ function cddl() {
   if [ -z "$s" ]
   then
     builtin cd
-  elif [ "${s:0:1}" == "@" ] || [ "${s:0:1}" == "%" ]
+  elif [ "${s:0:1}" = "@" ] || [ "${s:0:1}" = "%" ]
   then
     d="$(drush drupal-directory $1 --local 2>/dev/null)"
-    if [ $? == 0 ]
+    if [ $? = 0 ]
     then
       echo "cd $d";
       builtin cd "$d";
@@ -173,7 +173,7 @@ function cdd() {
   if [ -z "$s" ]
   then
     builtin cd
-  elif [ "${s:0:1}" == "@" ] || [ "${s:0:1}" == "%" ]
+  elif [ "${s:0:1}" = "@" ] || [ "${s:0:1}" = "%" ]
   then
     d="$(drush drupal-directory $s 2>/dev/null)"
     $(drush sa ${s%%:*} --component=remote-host > /dev/null 2>&1)
@@ -200,11 +200,11 @@ function cdd() {
 # Also works on remote sites, though.
 function gitd() {
   s="$1"
-  if [ -n "$s" ] && [ ${s:0:1} == "@" ] || [ ${s:0:1} == "%" ]
+  if [ -n "$s" ] && [ ${s:0:1} = "@" ] || [ ${s:0:1} = "%" ]
   then
     d="$(drush drupal-directory $s 2>/dev/null)"
     $(drush sa ${s%%:*} --component=remote-host > /dev/null 2>&1)
-    if [ $? == 0 ]
+    if [ $? = 0 ]
     then
       dssh ${s%%:*} cd "$d" \; git "${@:2}"
     else
@@ -224,13 +224,13 @@ function lsd() {
   p=()
   r=
   for a in "$@" ; do
-    if [ ${a:0:1} == "@" ] || [ ${a:0:1} == "%" ]
+    if [ ${a:0:1} = "@" ] || [ ${a:0:1} = "%" ]
     then
       p[${#p[@]}]="$(drush drupal-directory $a 2>/dev/null)"
-      if [ ${a:0:1} == "@" ]
+      if [ ${a:0:1} = "@" ]
       then
         $(drush sa ${a%:*} --component=remote-host > /dev/null 2>&1)
-        if [ $? == 0 ]
+        if [ $? = 0 ]
         then
           r=${a%:*}
         fi
@@ -252,7 +252,7 @@ function lsd() {
 function cpd() {
   p=()
   for a in "$@" ; do
-    if [ ${a:0:1} == "@" ] || [ ${a:0:1} == "%" ]
+    if [ ${a:0:1} = "@" ] || [ ${a:0:1} = "%" ]
     then
       p[${#p[@]}]="$(drush drupal-directory $a --local 2>/dev/null)"
     elif [ -n "$a" ]
@@ -267,7 +267,7 @@ function cpd() {
 # Ssh commands, such as `dssh @site ls /tmp`, are also supported.
 function dssh() {
   d="$1"
-  if [ ${d:0:1} == "@" ]
+  if [ ${d:0:1} = "@" ]
   then
     drush "$d" ssh "${@:2}"
   else
