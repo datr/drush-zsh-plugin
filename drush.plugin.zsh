@@ -104,11 +104,11 @@ alias q='drush sql-query'
 # cd='cdd' if you want to be able to use cd @remote to ssh to a
 # remote site.
 
-#alias cd='cddl'
-#alias ls='lsd'
-#alias cp='cpd'
-#alias ssh='dssh'
-#alias git='gitd'
+alias cd='cddl'
+alias ls='lsd'
+alias cp='cpd'
+alias ssh='dssh'
+alias git='gitd'
 
 # Find the drush executable and test it.
 d=$(which drush)
