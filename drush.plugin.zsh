@@ -104,7 +104,7 @@ alias q='drush sql-query'
 # cd='cdd' if you want to be able to use cd @remote to ssh to a
 # remote site.
 
-alias cd='cddl'
+alias cd='cdd'
 alias ls='lsd'
 alias cp='cpd'
 alias ssh='dssh'
@@ -144,7 +144,7 @@ done
 # that will ssh to the remote server when a remote site
 # specification is used.
 function cddl() {
-  s="$1"
+  local s="$1"
   if [ -z "$s" ]
   then
     builtin cd
@@ -169,7 +169,7 @@ function cddl() {
 # you prefer the `ssh` behavior, you can rename this shell alias
 # to `cd`.
 function cdd() {
-  s="$1"
+  local s="$1"
   if [ -z "$s" ]
   then
     builtin cd
