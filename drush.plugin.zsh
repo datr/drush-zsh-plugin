@@ -284,3 +284,18 @@ __drush_ps1() {
 
   [[ -n "$DRUPAL_SITE" ]] && printf "${1:- (%s)}" "$DRUPAL_SITE"
 }
+
+function drush_termsupport_preexec {
+  emulate -L zsh
+  setopt extended_glob
+
+    # cmd name only, or if this is sudo or ssh, the next cmd
+   local CMD=${1[(wr)^(*=*|sudo|ssh|rake|drush|-*)]:gs/%/%%}
+   local LINE="${2:gs/%/%%}"
+
+   title '$CMD' '%100>...>$LINE%<<'
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook preexec drush_termsupport_preexec
+
